@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sana Bir Teklifim Var 💕</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #ff9a9e 0%,
+          #fecfef 50%,
+          #fecfef 100%
+        );
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+        position: relative;
+      }
+
+      .screen {
+        display: none;
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+        animation: fadeIn 0.8s ease-in;
+      }
+
+      .screen.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .heart {
+        font-size: 120px;
+        color: #ff1744;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-shadow: 0 0 20px rgba(255, 23, 68, 0.5);
+        margin: 20px 0;
+        animation: heartbeat 2s infinite;
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .heart:hover {
+        transform: scale(1.2);
+        filter: brightness(1.2);
+      }
+
+      .heart-explosion {
+        position: fixed;
+        font-size: 30px;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      .click-text {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .main-text {
+        font-size: 32px;
+        color: #333;
+        margin: 30px 0 20px 0;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        line-height: 1.3;
+      }
+
+      .sub-text {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 40px;
+        font-style: italic;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-yes {
+        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        color: white;
+      }
+
+      .btn-no {
+        background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+        color: white;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn-centered {
+        margin: 0 auto;
+        display: block;
+        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        color: white;
+        padding: 20px 40px;
+        font-size: 20px;
+      }
+
+      .final-text {
+        font-size: 24px;
+        color: #333;
+        margin: 40px 0;
+        line-height: 1.5;
+        font-weight: 500;
+      }
+
+      .falling-emoji {
+        position: fixed;
+        font-size: 40px;
+        pointer-events: none;
+        z-index: 1000;
+        top: -50px;
+        animation: fall linear forwards;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(0px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(calc(100vh + 100px)) rotate(360deg);
+          opacity: 0.3;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .heart {
+          font-size: 80px;
+        }
+
+        .main-text {
+          font-size: 24px;
+        }
+
+        .sub-text {
+          font-size: 16px;
+        }
+
+        .btn {
+          padding: 12px 25px;
+          font-size: 16px;
+        }
+
+        .final-text {
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .heart {
+          font-size: 60px;
+        }
+
+        .main-text {
+          font-size: 20px;
+        }
+
+        .buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- İlk Ekran -->
+      <div class="screen active" id="screen1">
+        <div class="click-text">Kalbe dokun 💕</div>
+        <div class="heart" onclick="explodeHeart()">❤️</div>
+      </div>
+
+      <!-- İkinci Ekran -->
+      <div class="screen" id="screen2">
+        <div class="main-text">
+          Güzelim Benim Dünyamın Güzeli Olmaya Ne Dersin? 😘😁
+        </div>
+        <div class="sub-text">
+          Çok eğlenceli bi o kadar da güzel ilişki yaşamaya var mısın?
+        </div>
+        <div class="buttons">
+          <button class="btn btn-yes" onclick="yesClicked()">EVET</button>
+          <button class="btn btn-no" id="noBtn" onclick="noClicked()">
+            HAYIR
+          </button>
+        </div>
+      </div>
+
+      <!-- Üçüncü Ekran -->
+      <div class="screen" id="screen3">
+        <div class="final-text">
+          Biliyordum koluma tokanı cüzdanıma vesikalığını istiyorum şimdiden
+          teşekkürler güzelim
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let noClickCount = 0;
+
+      function explodeHeart() {
+        // Kalp patlaması efekti
+        for (let i = 0; i < 20; i++) {
+          setTimeout(() => {
+            createHeartExplosion();
+          }, i * 50);
+        }
+
+        // 2 saniye sonra ikinci ekrana geç
+        setTimeout(() => {
+          document.getElementById("screen1").classList.remove("active");
+          document.getElementById("screen2").classList.add("active");
+        }, 2000);
+      }
+
+      function createHeartExplosion() {
+        const heart = document.createElement("div");
+        heart.textContent = "❤️";
+        heart.className = "heart-explosion";
+
+        // Rastgele pozisyon ve yön
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = 100 + Math.random() * 200;
+        const startX = window.innerWidth / 2;
+        const startY = window.innerHeight / 2;
+
+        heart.style.left = startX + "px";
+        heart.style.top = startY + "px";
+
+        document.body.appendChild(heart);
+
+        // Animasyon
+        let currentDistance = 0;
+        const animation = setInterval(() => {
+          currentDistance += 5;
+          const x = startX + Math.cos(angle) * currentDistance;
+          const y = startY + Math.sin(angle) * currentDistance;
+
+          heart.style.left = x + "px";
+          heart.style.top = y + "px";
+          heart.style.opacity = 1 - currentDistance / distance;
+
+          if (currentDistance >= distance) {
+            clearInterval(animation);
+            document.body.removeChild(heart);
+          }
+        }, 20);
+      }
+
+      function noClicked() {
+        noClickCount++;
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.querySelector(".btn-yes");
+
+        if (noClickCount === 1) {
+          // İlk tıklamada evet büyüsün
+          yesBtn.style.transform = "scale(1.2)";
+          yesBtn.style.fontSize = "20px";
+        } else if (noClickCount === 2) {
+          // İkinci tıklamada evet daha da büyüsün
+          yesBtn.style.transform = "scale(1.4)";
+          yesBtn.style.fontSize = "22px";
+        } else if (noClickCount >= 3) {
+          // Üçüncü tıklamada hayır gitsin, evet ortaya gelsin
+          noBtn.style.display = "none";
+          yesBtn.textContent = "Benden kaçamazsın güzelim";
+          yesBtn.className = "btn btn-centered";
+          yesBtn.style.transform = "scale(1)";
+        }
+      }
+
+      function yesClicked() {
+        // Üçüncü ekrana geç ve emoji yağmuru başlat
+        document.getElementById("screen2").classList.remove("active");
+        document.getElementById("screen3").classList.add("active");
+
+        // Emoji yağmuru
+        startEmojiRain();
+      }
+
+      function startEmojiRain() {
+        const emojis = ["❤️", "😍", "😊", "💝"];
+
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            createFallingEmoji(
+              emojis[Math.floor(Math.random() * emojis.length)]
+            );
+          }, i * 200);
+        }
+      }
+
+      function createFallingEmoji(emoji) {
+        const emojiElement = document.createElement("div");
+        emojiElement.textContent = emoji;
+        emojiElement.className = "falling-emoji";
+
+        // Rastgele yatay pozisyon
+        emojiElement.style.left = Math.random() * window.innerWidth + "px";
+        emojiElement.style.animationDuration = 3 + Math.random() * 2 + "s";
+
+        document.body.appendChild(emojiElement);
+
+        // Animasyon bitince elementi kaldır
+        setTimeout(() => {
+          if (document.body.contains(emojiElement)) {
+            document.body.removeChild(emojiElement);
+          }
+        }, 6000);
+      }
+    </script>
+  </body>
+</html>
